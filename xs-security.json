@@ -1,0 +1,40 @@
+{
+  "xsappname": "risk-management",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.RiskViewer",
+      "description": "Risk Viewer"
+    },
+    {
+      "name": "$XSAPPNAME.RiskManager",
+      "description": "Risk Manager"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "RiskViewer",
+      "description":"Risk Viewer",
+      "scope-reference": ["$XSAPPNAME.RiskViewer"]
+    },
+    {
+      "name": "RiskManager",
+      "description":"Risk Manager",
+      "scope-reference": ["$XSAPPNAME.RiskManager"]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "RiskViewer",
+      "description": "Viewer access Risk Management",
+      "role-template-references": [ "$XSAPPNAME.RiskViewer" ]
+    },
+    {
+      "name": "RiskManager",
+      "description": "Manager access for Risk Management",
+      "role-template-references": [ "$XSAPPNAME.RiskManager" ]
+    }
+  ],
+  "authorities-inheritance": false
+}
