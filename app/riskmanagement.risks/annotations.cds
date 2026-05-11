@@ -30,7 +30,7 @@ annotate service.Risks with @(
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'supplier_BusinessPartner',
+                Label : '{i18n>Supplierbusinesspartner}',
                 Value : supplier_BusinessPartner,
             },
             {
@@ -87,7 +87,7 @@ annotate service.Risks with @(
         {
             $Type : 'UI.DataField',
             Value : supplier_BusinessPartner,
-            Label : 'supplier_BusinessPartner',
+            Label : '{i18n>Supplierbusinesspartner}',
         },
     ],
 );
@@ -155,7 +155,7 @@ annotate service.Risks with {
             },
             ],
         },
-        Common.ValueListWithFixedValues : true,
+        Common.ValueListWithFixedValues : false,
     )
 };
 

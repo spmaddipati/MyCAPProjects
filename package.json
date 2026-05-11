@@ -34,7 +34,19 @@
       },
       "auth": {
         "[development]": {
-          "kind": "dummy"
+          "kind": "mocked",
+          "users": {
+            "alice": {
+              "roles": [
+                "RiskManager"
+              ]
+            },
+            "bob": {
+              "roles": [
+                "RiskManager"
+              ]
+            }
+          }
         },
         "[production]": {
           "kind": "xsuaa"

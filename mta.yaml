@@ -18,8 +18,7 @@ build-parameters:
       commands:
         - npm install --production
         - >-
-          bash -c "cds -v | grep 'cds-dk' || npm i --production --no-save
-          @sap/cds-dk"
+          bash -c "cds -v | grep 'cds-dk' || npm i --production --no-save @sap/cds-dk"
         - bash -c "export PATH=$PATH:$(pwd)/node_modules/.bin"
         - cds build --production
   after-all:
@@ -36,12 +35,12 @@ modules:
         - rm -rf dist-zip dist
         - npm install
         - >-
-          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist
-          --include-task=generateCachebusterInfo
+          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist --include-task=generateCachebusterInfo
         - mkdir dist-zip
         - bash -c "cd dist && npx bestzip ../dist-zip/riskmanagementrisks.zip *"
       _artifactName: riskmanagementrisks.zip
-      supported-platforms: []
+      supported-platforms:
+        []
       build-result: dist-zip
   - name: RiskManagement-db-deployer
     type: hdb
@@ -56,6 +55,7 @@ modules:
     requires:
       - name: RiskManagement-service-uaa
       - name: RiskManagement-service-db
+      - name: RiskManagement-db
   - name: RiskManagement-srv
     type: nodejs
     path: gen/srv
@@ -77,6 +77,7 @@ modules:
       - name: RiskManagement-service-metadata
       - name: RiskManagement-service-connectivity
       - name: RiskManagement-service-logs
+      - name: RiskManagement-db
   - name: RiskManagement-aux-destinations
     type: com.sap.application.content
     parameters:
@@ -135,12 +136,12 @@ modules:
       commands:
         - npm install
         - >-
-          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist
-          --include-task=generateCachebusterInfo
+          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist --include-task=generateCachebusterInfo
         - bash -c "cd dist && npx bestzip ../../../build/dist/launchpad.zip *"
         - rm -rf dist
       _artifactName: launchpad.zip
-      supported-platforms: []
+      supported-platforms:
+        []
       build-result: ../../build/dist
   - name: RiskManagement-aux-ui-deployer
     type: com.sap.application.content
@@ -227,3 +228,8 @@ resources:
       service: html5-apps-repo
       service-plan: app-host
       service-name: RiskManagement-html5-apps-repo-host
+  - name: RiskManagement-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
